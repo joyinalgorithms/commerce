@@ -3,7 +3,7 @@ services:
     name: commerce-app
     env: python
     buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn commerce.wsgi
+    startCommand: gunicorn commerce.wsgi:application
     envVars:
       - key: DEBUG
         value: False
@@ -13,6 +13,6 @@ services:
         fromDatabase:
           name: commerce-db
           property: connectionString
-buildCommand: |
-  pip install -r requirements.txt
-  python manage.py collectstatic --noinput
+        buildCommand: |
+          pip install -r requirements.txt
+          python manage.py collectstatic --noinput
